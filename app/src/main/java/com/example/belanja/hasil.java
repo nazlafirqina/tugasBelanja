@@ -3,56 +3,59 @@ package com.example.belanja;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 public class hasil extends AppCompatActivity {
 
-    private Integer hasil1;
-    private Integer hasil2;
-    private Integer hasil3;
+    public static final String KEY_MINYAK = "MINYAK";
+    public static final String KEY_MIEINSTAN = "MIEINSTAN";
+    public static final String KEY_DETERJEN = "DETERJEN";
 
-    private TextView totalBelanja, totalMinyak, totalMie, totalDeterjen;
-    private  TextView qtyMinyak, qtyMie, qtyDeterjen;
+
+
+    private TextView tvTotalBelanja, tvTotalMinyak, tvTotalMie, tvTotalDeterjen, tvQtyMinyak, tvQtyMie, tvQtyDeterjen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hasil);
 
-        totalBelanja = findViewById(R.id.totalBelanja);
-        totalMinyak = findViewById(R.id.totalMinyak);
-        totalMie= findViewById(R.id.totalMie);
-        totalDeterjen = findViewById(R.id.totalDeterjen);
-        qtyMinyak = findViewById(R.id.qtyMinyak);
-        qtyMie = findViewById(R.id.qtyMie);
-        qtyDeterjen = findViewById(R.id.qtyDeterjen);
+        tvTotalBelanja = findViewById(R.id.totalBelanja);
+        tvTotalMinyak = findViewById(R.id.totalMinyak);
+        tvTotalMie = findViewById(R.id.totalMie);
+        tvTotalDeterjen = findViewById(R.id.totalDeterjen);
+        tvQtyMinyak = findViewById(R.id.qtyMinyak);
+        tvQtyMie = findViewById(R.id.qtyMie);
+        tvQtyDeterjen = findViewById(R.id.qtyDeterjen);
 
 
-        Bundle bundle = getIntent().getExtras().getBundle("bundle");
+//        Bundle bundle = getIntent().getExtras().getBundle("bundle");
+//
+        Integer qtyMinyak = getIntent().getIntExtra(KEY_MINYAK, 0);
+        Integer qtyMie = getIntent().getIntExtra(KEY_MIEINSTAN, 0);
+        Integer qtyDeterjen = getIntent().getIntExtra(KEY_DETERJEN, 0);
+        Log.e("IntentCatch", qtyMinyak.toString() + " " + qtyMie.toString() + " " + qtyDeterjen.toString());
+//
+//
+        Integer totalMinyak = qtyMinyak * 29000;
+        Integer totalIndomie = qtyMie * 2500;
+        Integer totalDeterjen = qtyDeterjen * 30000;
+//
+        Integer totalHarga = totalMinyak + totalIndomie + totalDeterjen;
+//
+        tvTotalBelanja.setText(totalHarga.toString());
 
-        hasil1 = getIntent().getExtras().getInt("minyak");
-        hasil2 = getIntent().getExtras().getInt("mieInstan");
-        hasil3 = getIntent().getExtras().getInt("deterjen");
+        tvTotalMinyak.setText(totalMinyak.toString());
 
+        tvTotalMie.setText(totalIndomie.toString());
 
-        Integer totalMinyak1 = hasil1 * 29000;
-        Integer totalIndomie1 = hasil2 * 2500;
-        Integer totalDeterjen1 = hasil3 * 30000;
+        tvTotalDeterjen.setText(totalDeterjen.toString());
 
-        Integer totalHarga = totalMinyak1 + totalIndomie1 + totalDeterjen1;
+        tvQtyMinyak.setText(qtyMinyak.toString());
 
-        totalBelanja.setText(totalHarga);
+        tvQtyMie.setText(qtyMie.toString());
 
-        totalMinyak.setText(totalMinyak1);
-
-        totalMie.setText(totalIndomie1);
-
-        totalMinyak.setText(totalDeterjen1);
-
-        qtyMinyak.setText(hasil1);
-
-        qtyMie.setText(hasil2);
-
-        qtyMinyak.setText(hasil3);
+        tvQtyDeterjen.setText(qtyDeterjen.toString());
     }
 }
